@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Created by nowcoder on 2016/7/15. // course@nowcoder.com NKnk66
+ * Created by GWC on 2016/7/15.
  */
 @Service
 public class MailSender implements InitializingBean {
@@ -30,8 +30,8 @@ public class MailSender implements InitializingBean {
     public boolean sendWithHTMLTemplate(String to, String subject,
                                         String template, Map<String, Object> model) {
         try {
-            String nick = MimeUtility.encodeText("牛客中级课");
-            InternetAddress from = new InternetAddress(nick + "<course@nowcoder.com>");
+            String nick = MimeUtility.encodeText("Michael"); //nick name
+            InternetAddress from = new InternetAddress(nick + "<kjgwc@126.com>");// mail sender
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
             String result = VelocityEngineUtils
@@ -43,7 +43,7 @@ public class MailSender implements InitializingBean {
             mailSender.send(mimeMessage);
             return true;
         } catch (Exception e) {
-            logger.error("发送邮件失败" + e.getMessage());
+            logger.error("Send email failed" + e.getMessage());
             return false;
         }
     }
@@ -52,17 +52,18 @@ public class MailSender implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         mailSender = new JavaMailSenderImpl();
 
-        // 请输入自己的邮箱和密码，用于发送邮件
-        mailSender.setUsername("course@nowcoder.com");
-        mailSender.setPassword("【你自己的密码】");
-        mailSender.setHost("smtp.exmail.qq.com");
+        // input your email and password to send an email
+        mailSender.setUsername("kjgwc@126.com");
+        mailSender.setPassword("146950abC");
+        mailSender.setHost("smtp.126.com");
         // 请配置自己的邮箱和密码
 
         mailSender.setPort(465);
-        mailSender.setProtocol("smtps");
+        mailSender.setProtocol("smtp");
         mailSender.setDefaultEncoding("utf8");
         Properties javaMailProperties = new Properties();
         javaMailProperties.put("mail.smtp.ssl.enable", true);
+//        javaMailProperties.put("mail.smtp.ssl.enable", false);
         mailSender.setJavaMailProperties(javaMailProperties);
     }
 }

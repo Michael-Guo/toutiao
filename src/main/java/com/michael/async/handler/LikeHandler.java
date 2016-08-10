@@ -28,15 +28,15 @@ public class LikeHandler implements EventHandler {
     @Override
     public void doHandle(EventModel model) {
         System.out.println("liked");
-//        Message message = new Message();
-//        message.setFromId(3);//system user
-//        message.setToId(model.getEntityOwnerId());
-//        message.setToId(model.getActorId());// send a message to myself
-//        User user = userService.getUser(model.getActorId());
-//        message.setContent("User" + user.getName() +
-//                "like your news, http://127.0.0.1:8080/news/" + model.getEntityId());
-//        message.setCreatedDate(new Date());
-//        messageService.addMessage(message);
+        Message message = new Message();
+        message.setFromId(3);//system user
+        message.setToId(model.getEntityOwnerId());
+        //message.setToId(model.getActorId());// send a message to myself
+        User user = userService.getUser(model.getActorId());
+        message.setContent("User " + user.getName() +
+                " like your news, http://127.0.0.1:8080/news/" + model.getEntityId());
+        message.setCreatedDate(new Date());
+        messageService.addMessage(message);
     }
 
     @Override

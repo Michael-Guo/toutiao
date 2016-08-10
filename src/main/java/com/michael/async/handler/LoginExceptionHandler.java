@@ -29,16 +29,18 @@ public class LoginExceptionHandler implements EventHandler {
     @Override
     public void doHandle(EventModel model) {
         //judge illeagle login or not
-        Message message = new Message();
-        message.setToId(model.getActorId());
-        message.setContent("Login ip exception");
-        message.setFromId(3);
-        message.setCreatedDate(new Date());
-        messageService.addMessage(message);
+        if (false) {
+            Message message = new Message();
+            message.setToId(model.getActorId());
+            message.setContent("Login ip exception");
+            message.setFromId(3);
+            message.setCreatedDate(new Date());
+            messageService.addMessage(message);
 
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("username", model.getExt("username"));
-        mailSender.sendWithHTMLTemplate(model.getExt("email"), "Login Exception", "mails/welcom.html", map);
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("username", model.getExt("username"));
+            mailSender.sendWithHTMLTemplate(model.getExt("email"), "Login Exception", "mails/loginException.html", map);
+        }
     }
 
     @Override

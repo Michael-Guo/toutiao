@@ -1,6 +1,8 @@
 package com.michael.controller;
 
+import com.michael.async.EventModel;
 import com.michael.async.EventProducer;
+import com.michael.async.EventType;
 import com.michael.service.UserService;
 import com.michael.util.ToutiaoUtil;
 import org.slf4j.Logger;
@@ -73,8 +75,8 @@ public class LoginController {
                     cookie.setMaxAge(3600 * 24 * 5);
                 }
                 response.addCookie(cookie);
-                //eventProducer.fireEvent(new EventModel(EventType.LOGIN).setActorId((int) map.get("userId"))
-                //.setExt("username", username).setExt("email", "kjgwc@126.com"));
+                eventProducer.fireEvent(new EventModel(EventType.LOGIN).setActorId((int) map.get("userId"))
+                        .setExt("username", username).setExt("email", "kjgwc@126.com"));
                 return ToutiaoUtil.getJSONString(0, "Login Success");
             } else {
                 return ToutiaoUtil.getJSONString(1, map);
