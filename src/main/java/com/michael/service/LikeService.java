@@ -4,7 +4,6 @@ import com.michael.util.JedisAdapter;
 import com.michael.util.RedisKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.Jedis;
 
 /**
  * Created by GWC on 2016/7/19.

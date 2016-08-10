@@ -11,13 +11,10 @@ import com.michael.service.NewsService;
 import com.michael.util.ToutiaoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by GWC on 2016/7/19.
@@ -43,10 +40,10 @@ public class LikeController {
         int userId = hostHolder.getUser().getId();
         long likeCount = likeService.like(userId, EntityType.ENTITY_NEWS, newsId);
         News news = newsService.getById(newsId);
-        newsService.updateLikeCount(newsId, (int)likeCount);
+        newsService.updateLikeCount(newsId, (int) likeCount);
 
         eventProducer.fireEvent(new EventModel(EventType.LIKE).setActorId(hostHolder.getUser().getId())
-        .setEntityId(newsId).setEntityType(EntityType.ENTITY_NEWS).setEntityOwnerId(news.getUserId()));
+                .setEntityId(newsId).setEntityType(EntityType.ENTITY_NEWS).setEntityOwnerId(news.getUserId()));
         return ToutiaoUtil.getJSONString(0, String.valueOf(likeCount));
     }
 

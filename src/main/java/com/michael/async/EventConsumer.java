@@ -36,10 +36,13 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware 
     @Override
     public void afterPropertiesSet() throws Exception {
         //找出所有实现了EventHandler接口的类
+        //存储所有的handler
         Map<String, EventHandler> beans = applicationContext.getBeansOfType(EventHandler.class);
         if (beans != null) {
+            //找出每个handler能处理的事件类型，即EventType
             for (Map.Entry<String, EventHandler> entry : beans.entrySet()) {
                 List<EventType> eventTypes = entry.getValue().getSupportEventTypes();
+                //将能处理某个事件的handler都放在一个列表中
                 for (EventType type : eventTypes) {
                     if (!config.containsKey(type)) {
                         config.put(type, new ArrayList<EventHandler>());
@@ -57,7 +60,7 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware 
                 // 从队列一直消费
                 while (true) {
                     String key = RedisKeyUtil.getEventQueueKey();
-                    List<String> events = jedisAdapter.brpop(0, key);
+                    List<String> events = jedisAdapter.brpop(0, key);//阻塞队列，timeout为0表示一直等待
                     // 第一个元素是队列名字
                     for (String message : events) {
                         if (message.equals(key)) {
@@ -80,7 +83,6 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware 
         });
         thread.start();
     }
-
 
 
     // 记录程序上下文
