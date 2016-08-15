@@ -54,7 +54,7 @@ public class MailSender implements InitializingBean {
 
         // input your email and password to send an email
         mailSender.setUsername("kjgwc@126.com");
-        mailSender.setPassword("146950abC");
+        mailSender.setPassword("****");
         mailSender.setHost("smtp.126.com");
         // 请配置自己的邮箱和密码
 
