@@ -32,7 +32,7 @@ public class IndexController {
     public String index(HttpSession session) {
         //toutiaoService.say();
         logger.info("Visit Index");
-        return "Hello gwc" + session.getAttribute("msg") +"<br> Say:" + toutiaoService.say();
+        return "Hello gwc" + session.getAttribute("msg") + "<br> Say:" + toutiaoService.say();
 
     }
 
@@ -48,11 +48,11 @@ public class IndexController {
     @RequestMapping(value = {"/vm"})
     public String news(Model model) {
         model.addAttribute("value1", "vv1");
-        List<String> colors = Arrays.asList(new String[] {"RED","GREEn", "BLUE",});
+        List<String> colors = Arrays.asList(new String[]{"RED", "GREEn", "BLUE",});
 
         Map<String, String> map = new HashMap<String, String>();
         for (int i = 0; i < 4; i++) {
-            map.put(String.valueOf(i), String.valueOf(i*i));
+            map.put(String.valueOf(i), String.valueOf(i * i));
         }
         model.addAttribute("colors", colors);
         model.addAttribute("map", map);
@@ -88,6 +88,7 @@ public class IndexController {
         return sb.toString();
 
     }
+
     @RequestMapping(value = {"/response"})
     @ResponseBody
     public String response(@CookieValue(value = "michaelid", defaultValue = "a") String michaelId,
@@ -96,7 +97,7 @@ public class IndexController {
                            HttpServletResponse response) {
         response.addCookie(new Cookie(key, value));
         response.addHeader(key, value);
-        return "NowcoderId From Cookie:" + michaelId;
+        return "michaelId From Cookie:" + michaelId;
 
     }
 
@@ -124,6 +125,7 @@ public class IndexController {
         }
         throw new IllegalArgumentException("key error");
     }
+
     //自定义异常处理
     @ExceptionHandler
     @ResponseBody
