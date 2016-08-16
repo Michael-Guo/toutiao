@@ -1,12 +1,10 @@
 package com.michael.util;
 
 import com.alibaba.fastjson.JSONObject;
-import com.michael.aspect.LogAspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 /**
@@ -67,7 +65,8 @@ public class ToutiaoUtil {
         }
     }
 
-    public static String[] IMAGE_FILE_EXT = new String[] {"png", "bmp", "jpg", "jpeg"};
+    public static String[] IMAGE_FILE_EXT = new String[]{"png", "bmp", "jpg", "jpeg"};
+
     public static boolean isFileAllowed(String fileExt) {
         for (String ext : IMAGE_FILE_EXT) {
             if (ext.equals(fileExt))

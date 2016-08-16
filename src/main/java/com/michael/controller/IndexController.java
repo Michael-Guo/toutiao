@@ -6,11 +6,8 @@ import com.michael.service.ToutiaoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +41,7 @@ public class IndexController {
     public String profile(@PathVariable("groupid") String groupId,
                           @PathVariable("userId") int userId,
                           @RequestParam(value = "type", defaultValue = "1") int type,
-                          @RequestParam(value = "key", defaultValue = "nowcoder") String key) {
+                          @RequestParam(value = "key", defaultValue = "michael") String key) {
         return String.format("GID{%s},UID{%d},Type{%d},Key{%s}", groupId, userId, type, key);
     }
 
@@ -93,13 +90,13 @@ public class IndexController {
     }
     @RequestMapping(value = {"/response"})
     @ResponseBody
-    public String response(@CookieValue(value = "nowcoderid", defaultValue = "a") String nowcoderId,
+    public String response(@CookieValue(value = "michaelid", defaultValue = "a") String michaelId,
                            @RequestParam(value = "key", defaultValue = "key") String key,
                            @RequestParam(value = "value", defaultValue = "value") String value,
                            HttpServletResponse response) {
         response.addCookie(new Cookie(key, value));
         response.addHeader(key, value);
-        return "NowcoderId From Cookie:" + nowcoderId;
+        return "NowcoderId From Cookie:" + michaelId;
 
     }
 

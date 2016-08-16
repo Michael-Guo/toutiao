@@ -267,11 +267,11 @@ public class MultiThread {
 
     public static void main(String[] argv) {
         //testThread();
-        //testSynchronized();
+        testSynchronized();
         //testBlockingQueue();
         //testAtomic();
         //testThreadLocal();
 //        testExecutor();
-        testFuture();
+//        testFuture();
     }
 }
